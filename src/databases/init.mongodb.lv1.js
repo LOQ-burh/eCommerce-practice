@@ -1,6 +1,7 @@
 'use stric'
 require("dotenv").config();
 const mongoose = require("mongoose");
+const { countConnect } = require('../helpers/check.connect')
 
 class Database {
     constructor() {
@@ -13,11 +14,11 @@ class Database {
             mongoose.set('debug', true)
             mongoose.set('debug', { color: true })
         }
-        
+
         mongoose
             .connect(process.env.MONGODB_URI)
             .then(() => {
-                console.log("Connected to MongoDB!");
+                console.log("Connected to MongoDB!", countConnect());
             })
             .catch((e) => {
                 console.error("Did not connect to MongoDB", e);
