@@ -6,7 +6,7 @@ const server = app.listen( PORT, () => {
     console.log(`WSX eCommerce start with ${PORT}`)
 })
 
-process.on('SIGINT', () => {
-    server.close( () => console.log(`Exit Server Exprerss`))
-    // notify.send( ...ping)
-})
+// process.on('SIGINT', () => {
+//     server.close( () => console.log(`Exit Server Exprerss`))
+//     // notify.send( ...ping)
+// })

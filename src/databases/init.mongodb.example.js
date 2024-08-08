@@ -1,7 +1,6 @@
 
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://nguyenminhquan042004:UmJW9mwl4zV6bc5A@ecommerce-practice.hgdl0.mongodb.net/?retryWrites=true&w=majority&appName=eCommerce-practice";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.MONGODB_URI, {

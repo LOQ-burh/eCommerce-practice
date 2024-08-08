@@ -16,7 +16,7 @@ class Database {
         }
 
         mongoose
-            .connect(process.env.MONGODB_URI)
+            .connect(process.env.MONGODB_URI, { maxPoolSize: 50 })
             .then(() => {
                 console.log("Connected to MongoDB!", countConnect());
             })
