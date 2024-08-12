@@ -1,7 +1,7 @@
 'use strict'
 
 const bcrypt = require('bcrypt')
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 const shopModel = require('../models/shop.model')
 const KeyTokenService = require('./keytoken.service');
 const { createTokenPair } = require('../auth/authUtils')
