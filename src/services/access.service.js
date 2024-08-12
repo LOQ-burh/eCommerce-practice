@@ -51,9 +51,6 @@ class AccessService {
                     }
                 })
 
-                // const privateKey = crypto.getRandomValues(64).toString('hex')
-                // const publicKey  = crypto.getRandomValues(64).toString('hex')
-
                 console.log({ privateKey, publicKey })
 
                 // console.log(
