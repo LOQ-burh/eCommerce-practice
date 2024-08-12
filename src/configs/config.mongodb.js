@@ -20,9 +20,9 @@ const dev = {
         port: process.env.DEV_APP_PORT || 3052
     },
     db: {
-        host: process.env.DEV_APP_HOST || 'localhost',
-        port: process.env.DEV_APP_PORT || 27017,
-        name: process.env.DEV_APP_NAME || 'shopDEV'
+        host: process.env.DEV_DB_HOST || 'localhost',
+        port: process.env.DEV_DB_PORT || 27017,
+        name: process.env.DEV_DB_NAME || 'shopDEV'
     }
 }
 const product = {

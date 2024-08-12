@@ -3,7 +3,11 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { countConnect } = require('../helpers/check.connect')
 const { db: { host, name, port } } = require('../configs/config.mongodb')
-// const connectString = `mongodb://${host}:${port}/${name}`
+
+const connectString = `mongodb://${host}:${port}/${name}`
+
+const MONGODB_URI_SRV = process.env.MONGODB_URI
+
 class Database {
     constructor() {
         this.connect();
@@ -17,7 +21,7 @@ class Database {
         }
 
         mongoose
-            .connect(process.env.MONGODB_URI, { maxPoolSize: 50 })
+            .connect(connectString, { maxPoolSize: 50 })
             .then(() => {
                 console.log("Connected to MongoDB!", countConnect());
             })

@@ -14,16 +14,21 @@ app.use(morgan("dev"))
 // morgan("tiny")
 app.use(helmet())
 app.use(compression())
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 //init db   
 require('./databases/init.mongodb.lv1')
-const { checkOverLoad } =  require('./helpers/check.connect')
-checkOverLoad()
+// const { checkOverLoad } =  require('./helpers/check.connect')
+// checkOverLoad()
 // init routes
-app.get('/', ( req, res, next) => {
-    return res.status(200).json({
-        message: 'Welcome tipsJS'
-    })
-})
+// app.get('/', ( req, res, next) => {
+//     return res.status(200).json({
+//         message: 'Welcome tipsJS'
+//     })
+// })
+app.use('/', require('./routes'))
 //hanlding errors
 
 module.exports = app
