@@ -3,7 +3,7 @@
 const bcrypt = require('bcrypt')
 const crypto = require('node:crypto');
 const shopModel = require('../models/shop.model')
-const KeyTokenService = require('./keytoken.service');
+const KeyTokenService = require('./keyToken.service');
 const { createTokenPair } = require('../auth/authUtils')
 const { getInfoData } = require('../utils/');
 const { BadRequestError, ConflictRequestError, AuthFailureError } = require('../core/error.response');
@@ -24,6 +24,12 @@ class AccessService {
   4 - generate token
   5 - get data return login
   */
+  static logout = async ( keyStore ) => {
+    const delKey = await KeyTokenService.removeKeyById( keyStore._id )
+    console.log({delKey})
+    return delKey
+  }
+
     static login = async ({ email, password, refreshToken = null }) => {
       // 1.
       const foundShop = await findByEmail({ email })
