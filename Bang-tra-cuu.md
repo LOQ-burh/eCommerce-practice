@@ -10,6 +10,8 @@ Như bạn có thể thấy bên dưới, mã trạng thái HTTP là các số n
 
 ![algorithm symmetry](image-1.png)
 
+![Polymorphic pattern](image.png)
+
 ## Danh sách file đã tác động vào trong việc triển khai
 
   sign-up
