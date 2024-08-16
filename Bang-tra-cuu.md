@@ -12,6 +12,8 @@ Như bạn có thể thấy bên dưới, mã trạng thái HTTP là các số n
 
 ![Polymorphic pattern](image.png)
 
+api product using factory pattern
+
 ## Danh sách file đã tác động vào trong việc triển khai
 
   sign-up
