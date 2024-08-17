@@ -18,34 +18,26 @@ const RoleShop = {
 
 class AccessService {
 
-  static handleRefreshToken = async ( refreshToken ) => {
-    // check token which was used or wasn't
-    const foundToken = await KeyTokenService.findByRefreshTokenUsed( refreshToken )
-    if(foundToken) {
-      // decode to verify who is hacker?
-      const { userId, email } = await verifyJWT( refreshToken, foundToken.privateKey )
-      console.log({ userId, email })
+  static handleRefreshTokenV2 = async ({ keyStore, user, refreshToken }) => {
 
-      // delete token in keyStore
+    const { userId, email } = user
+
+    if(keyStore.refreshTokensUsed.includes(refreshToken)) {
       await KeyTokenService.deleteKeyById( userId )
       throw new ForbidenError('Something wrong happened, please relogin!')
     }
 
-    const holderToken = await KeyTokenService.findByRefreshToken( refreshToken )
-    if(!holderToken) throw new AuthFailureError('Shop is not registered - holder')
-
-    const { userId, email } = await verifyJWT( refreshToken, holderToken.privateKey )
-    console.log('[2]--', { userId, email })
+    if(keyStore.refreshToken !== refreshToken) throw new AuthFailureError('Shop is not registered!')
 
     //check userId
     const foundShop = await findByEmail( { email } )
     if(!foundShop) throw new AuthFailureError('Shop is not registered - found')
 
     // create new pair
-    const tokens = await createTokenPair({userId: userId, email}, holderToken.publicKey, holderToken.privateKey)
+    const tokens = await createTokenPair({userId: userId, email}, keyStore.publicKey, keyStore.privateKey)
 
     //update token
-    await holderToken.updateOne({
+    await keyStore.updateOne({
       $set: {
         refreshToken: tokens.refreshToken
       },
@@ -55,7 +47,7 @@ class AccessService {
     })
 
     return {
-      user: { userId, email },
+      user,
       tokens
     }
   }

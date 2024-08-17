@@ -33,7 +33,7 @@ class KeyTokenService {
     //   console.error('Error finding token by userId:', error.message);
     //   throw error;
     // }
-    return await keyTokenModel.findOne({ user: new Types.ObjectId(userId) }).lean()
+    return await keyTokenModel.findOne({ user: new Types.ObjectId(userId) })
   }
 
   static removeKeyById = async ( id ) => {

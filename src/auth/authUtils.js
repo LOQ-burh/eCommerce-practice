@@ -8,7 +8,8 @@ const { AuthFailureError, NotFoundError } = require('../core/error.response')
 const HEADER = {
   API_KEY: 'x-api-key',
   CLIENT_ID: 'x-client-id',
-  AUTHORIZATION: 'authorization'
+  AUTHORIZATION: 'authorization',
+  REFRESHTOKEN: 'refreshtoken'
 }
 
 const createTokenPair = async ( payLoad, publicKey, privateKey ) => {
@@ -36,7 +37,7 @@ const createTokenPair = async ( payLoad, publicKey, privateKey ) => {
     }
 }
 
-const authentication = asyncHandler(async (req, res, next) => {
+const authenticationV2 = asyncHandler(async (req, res, next) => {
   /*
   1 - Check userId missing??
   2 - get accessToken
@@ -55,6 +56,23 @@ const authentication = asyncHandler(async (req, res, next) => {
   if (!keyStore) throw new NotFoundError('Not found keyStore!')
 
   // 3.
+  if(req.headers[HEADER.REFRESHTOKEN]){
+    try {
+      const refreshToken = req.headers[HEADER.REFRESHTOKEN]
+      const decodeUser = JWT.verify( refreshToken, keyStore.privateKey )
+
+      if(userId !== decodeUser.userId) throw new AuthFailureError('Invalid userId!')
+
+      req.keyStore = keyStore
+      req.user = decodeUser
+      req.refreshToken = refreshToken
+
+      return next()
+
+    } catch (error) {
+      throw error
+    }
+  }
   const accessToken = req.headers[HEADER.AUTHORIZATION]
   if (!accessToken) throw new AuthFailureError('Invalid Request!')
 
@@ -78,6 +96,6 @@ const verifyJWT = async ( token, keySecret ) => {
 
 module.exports = {
     createTokenPair,
-    authentication,
+    authenticationV2,
     verifyJWT
 }
