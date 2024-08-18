@@ -11,17 +11,29 @@ class ProductFactory {
     type: 'Clothing',
     payload
   */
+
+  static productRegistry = {}
+
+  static registerProductType( type, classRef ) {
+    ProductFactory.productRegistry[type] = classRef
+  }
+
   static async createProduct( type, payload ) {
-    switch (type) {
-      case 'Electronics':
-        return new Electronics(payload).createProduct()
-      case 'Clothing':
-        return new Clothing(payload).createProduct()
-      case 'Furniture':
-        return new Furnitures(payload).createProduct()
-      default:
-        throw new BadRequestError(`Invalid Products Type::${type}`)
-    }
+    const productClass = ProductFactory.productRegistry[type]
+
+    if(!productClass) throw new BadRequestError(`Invalid product types::${type}`)
+
+    // switch (type) {
+    //   case 'Electronics':
+    //     return new Electronics(payload).createProduct()
+    //   case 'Clothing':
+    //     return new Clothing(payload).createProduct()
+    //   case 'Furniture':
+    //     return new Furnitures(payload).createProduct()
+    //   default:
+    //     throw new BadRequestError(`Invalid Products Type::${type}`)
+    // }
+    return new productClass(payload).createProduct()
   }
 }
 
@@ -81,7 +93,7 @@ class Electronics extends Product {
   }
 }
 
-class Furnitures extends Product {
+class Furniture extends Product {
 
   async createProduct() {
     const newFurniture = await furniture.create({
@@ -96,5 +108,9 @@ class Furnitures extends Product {
     return newProduct
   }
 }
+
+ProductFactory.registerProductType('Electronics', Electronics)
+ProductFactory.registerProductType('Clothing', Clothing)
+ProductFactory.registerProductType('Furniture', Furniture)
 
 module.exports = ProductFactory
