@@ -34,6 +34,17 @@ class ProductController {
     }).send(res)
   }
 
+  unpublicProductByShop = async ( req, res, next ) => {
+
+    new SuccessResponse({
+      message: 'unPublish Product success!',
+      metadata: await ProductServiceV2.unpublicProductByShop({
+        product_id: req.params.id,
+        product_shop: req.user.userId
+      })
+    }).send(res)
+  }
+
   // GET
   /**
    * @desc Get all drafts  for shop

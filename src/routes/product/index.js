@@ -12,6 +12,7 @@ router.use(authenticationV2)
 // ==============
 router.post('', asyncHandler(productController.createProduct))
 router.post('/publish/:id', asyncHandler(productController.publicProductByShop))
+router.post('/unpublish/:id', asyncHandler(productController.unpublicProductByShop))
 // GET
 router.get('/drafts/all', asyncHandler(productController.getAllDraftsForShop))
 router.get('/publish/all', asyncHandler(productController.getAllPublishForShop))

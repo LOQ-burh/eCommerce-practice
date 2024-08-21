@@ -71,6 +71,9 @@ productSchema.pre('save', function (next) {
   next()
 })
 
+// create index for search
+productSchema.index({ product_name: 'text', product_description: 'text' })
+
 // productType = clothing
 const clothingSchema = new Schema({
   brand: {

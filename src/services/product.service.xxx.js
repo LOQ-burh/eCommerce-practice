@@ -3,7 +3,7 @@
 const { product, clothing, electronic, furniture } = require('../models/product.model')
 const { BadRequestError, ConflictRequestError, AuthFailureError, ForbidenError } = require('../core/error.response');
 
-const { findAllDraftForShop, publicProductByShop, findAllPublishForShop } = require('../models/repositories/product.repo')
+const { findAllDraftForShop, publicProductByShop, findAllPublishForShop, unpublicProductByShop } = require('../models/repositories/product.repo')
 // define Factory class to create product
 class ProductFactory {
 
@@ -40,6 +40,11 @@ class ProductFactory {
   static async publicProductByShop ({ product_shop, product_id }) {
     return await publicProductByShop({ product_shop, product_id })
   }
+
+  static async unpublicProductByShop ({ product_shop, product_id }) {
+    return await unpublicProductByShop({ product_shop, product_id })
+  }
+
 
   static async findAllDraftForShop ({ product_shop, limit = 50, skip = 0 }) {
     const query = { product_shop, isDraft: true }
