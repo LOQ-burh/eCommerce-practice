@@ -7,6 +7,7 @@ const productController = require('../../controllers/product.controller')
 const asyncHandler = require('../../helpers/asyncHandler')
 const { authenticationV2  } = require('../../auth/authUtils')
 
+router.get('/search/:keySearch', asyncHandler(productController.getListsSearchProduct))
 // Authentication
 router.use(authenticationV2)
 // ==============
