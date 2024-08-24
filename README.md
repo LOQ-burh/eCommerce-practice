@@ -4,6 +4,8 @@
 
 * Sign-up: using design pattern
 
+* Pagination: Type Paging
+
 
 ## Getting Started
 
@@ -30,7 +32,7 @@ Follow the following steps to get development environment running.
 * Install node modules #even though they are pre-installed run this command to check if they are up to date
 
    ```bash
-   cd 
+   cd
    npm i
    ```
 
@@ -39,6 +41,6 @@ Follow the following steps to get development environment running.
 * Build application
 
   ```bash
-  cd 
+  cd
   npm run dev
   ```
