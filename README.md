@@ -16,7 +16,13 @@
 
 * . . .
 
-* Inventories
+* Inventories:
+
+Logic
+
+Automatically reduce stock quantity when an order is placed
+
+Returns to original stock quantity after 30 minutes of unpaid payment
 
 * Orders
 
