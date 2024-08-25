@@ -4,8 +4,25 @@
 
 * Sign-up: using design pattern
 
+* Sign-in:
+
+* Authentication:
+
+* Logout
+
 * Pagination: Type Paging
 
+* Product: CRUD using Factory & Strategy
+
+* . . .
+
+* Inventories
+
+* Orders
+
+* Payments
+
+* Carts
 
 ## Getting Started
 
