@@ -1,12 +1,13 @@
 'use strict'
 
 const { Schema, model } = require('mongoose'); // Erase if already required
+const { ALL, SPECIFIC } = require('./enums/filterType')
 
 const DOCUMENT_NAME = 'Discount'
 const COLLECTION_NAME = 'Discounts'
 
 // Declare the Schema of the Mongo model
-var inventorySchema = new Schema({
+var discountSchema = new Schema({
   discount_name:{
     type:String,
     require: true
@@ -80,5 +81,5 @@ var inventorySchema = new Schema({
 
 //Export the model
 module.exports = {
-  inventory: model(DOCUMENT_NAME, inventorySchema)
+  discount: model(DOCUMENT_NAME, discountSchema)
 };

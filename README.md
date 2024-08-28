@@ -24,6 +24,20 @@ Automatically reduce stock quantity when an order is placed
 
 Returns to original stock quantity after 30 minutes of unpaid payment
 
+* Discount service
+
+1 - Generator Discount Code [Shop | Admin]
+
+2 - Get all discount codes [User | Shop]
+
+3 - Get all product by discount code [User]
+
+4 - Get discount amount [User]
+
+5 - Delete discount Code [Admin | Shop]
+
+6 - Cancel discount Code [User]
+
 * Orders
 
 * Payments
